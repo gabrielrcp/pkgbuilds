@@ -1,0 +1,86 @@
+# Based on aquaria-git PKGBUILD from:
+# Maintainer: AlexanderR <alexander r at gmx com>
+# I'm not gonna upload this one to AUR since
+# it is kinda ugly.
+
+
+pkgname=aquaria-git
+pkgver=20130216
+pkgrel=1
+pkgdesc="2D Fantasy Action-Adventure by Bit Blot. Open Source version. Package uses data files from Humble Indie Bundle if present, otherwise falls back to downloading beta."
+arch=('i686' 'x86_64')
+url='http://www.bit-blot.com/'
+license=('custom: commercial' 'GPL')
+depends=('openal' 'sdl' 'lua51' 'freetype2' 'libvorbis' 'gcc-libs' 'libpng')
+makedepends=('unzip' 'cmake' 'git')
+
+source=('aquaria.desktop'
+        'aquaria.sh'
+        'aquaria-lnx-humble-bundle.mojo.run' #download from HIB
+	'lua51-fix.patch')
+md5sums=('71c79de74f4971cce34a172f44c9fc1d'
+         'acecf3620ba38d51266b289f8897ca96'
+         '8b24ddeeb553e028bbd501102f891cc2'
+         '28b93e87acd1e19f52d558b6a05dd5e7')
+
+#PKGEXT='.pkg.tar'
+
+_gitroot=git://github.com/fgenesis/Aquaria_clean.git
+_gitname=aquaria
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [[ -d "$_gitname" ]]; then
+    cd "$_gitname" && git pull origin
+    msg "The local files are updated."
+  else
+    git clone "$_gitroot" "$_gitname"
+  fi
+
+  msg "GIT checkout done or server timeout"
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+
+  cd "$srcdir/$_gitname-build"
+
+  # Lua 5.1 fix
+  git apply "$srcdir"/lua51-fix.patch
+
+  cmake -DCMAKE_BUILD_TYPE=Release .
+  make
+
+
+  cd "$srcdir"
+  unzip -uo aquaria-lnx-humble-bundle.mojo.run || true
+
+  cd data
+
+  cp -r README-linux.txt aquaria.png docs/ ..
+
+  # libs are to be replaced by system ones, new executable should be created during compilation,
+  # xdg-open is currently used only in obsolete "onBuy()" function
+  rm -rf libSDL-1.2.so.0 libgcc_s.so.1 libopenal.so.1 libstdc++.so.6 \
+    aquaria xdg-open aquaria.png
+}
+
+package() {
+  cd "$srcdir"
+
+  mkdir -p "$pkgdir/usr/share/$pkgname"
+  install -D -m 755 aquaria.sh "$pkgdir/usr/bin/aquaria"
+  install -D -m 644 aquaria.desktop "$pkgdir/usr/share/applications/aquaria.desktop"
+  install -D -m 644 aquaria.png "$pkgdir/usr/share/pixmaps/aquaria.png"
+  install -D -m 644 README-linux.txt "$pkgdir/usr/share/doc/$pkgname/README"
+  cp -r data/* "$pkgdir/usr/share/$pkgname"
+  cp -r docs/* "$pkgdir/usr/share/doc/$pkgname"
+
+  cd "$srcdir/$_gitname-build"
+
+  cp -r game_scripts/* "$pkgdir/usr/share/$pkgname"
+  cp -r files/* "$pkgdir/usr/share/$pkgname"
+  install -D -m 644 CONTENT-LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -D -m 755 aquaria "$pkgdir/usr/share/$pkgname"
+}

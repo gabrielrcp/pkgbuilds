@@ -1,0 +1,29 @@
+From c199607d7c6b2bf249d986a1093b03b375a583e9 Mon Sep 17 00:00:00 2001
+From: Gabriel Peixoto <gabrielrcp@gmail.com>
+Date: Sat, 16 Feb 2013 21:24:23 -0200
+Subject: [PATCH] Lua 5.1 fix.
+
+---
+ Aquaria/ScriptInterface.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Aquaria/ScriptInterface.cpp b/Aquaria/ScriptInterface.cpp
+index 45232af..ab2a73d 100644
+--- a/Aquaria/ScriptInterface.cpp
++++ b/Aquaria/ScriptInterface.cpp
+@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ #include "../BBGE/ScriptObject.h"
+ extern "C"
+ {
+-	#include "lua.h"
+-	#include "lauxlib.h"
+-	#include "lualib.h"
++	#include "lua5.1/lua.h"
++	#include "lua5.1/lauxlib.h"
++	#include "lua5.1/lualib.h"
+ }
+ #include "DSQ.h"
+ #include "Game.h"
+-- 
+1.8.1.3
+
