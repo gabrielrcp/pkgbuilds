@@ -1,5 +1,7 @@
 # Author: Maep <piconna@googlemail.com>
-# Maintainer: Guff <cassmacguff@gmail.com>
+# Contributor: Guff <cassmacguff@gmail.com>
+# Maintainer: Gabriel Peixoto <gabrielrcp@gmail.com>
+
 pkgname=fehlstart-git
 pkgver=20130304
 pkgrel=1
