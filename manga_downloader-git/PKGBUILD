@@ -1,8 +1,8 @@
 # Maintainer: Gabriel Peixoto <gabrielrcp@gmail.com>
 
 pkgname=manga_downloader-git
-pkgver=20120314
-pkgrel=2
+pkgver=20130319
+pkgrel=1
 pkgdesc="Python script for downloading manga from varios websites"
 arch=('any')
 url="https://github.com/jiaweihli/manga_downloader"
@@ -53,7 +53,7 @@ build() {
 package() {
   cd "$srcdir/$_gitname-build/src"
 
-  install -dm 755"$pkgdir/usr/share/manga_downloader"
+  install -dm 755 "$pkgdir/usr/share/manga_downloader"
   cp -r . "$pkgdir/usr/share/manga_downloader"
   install -dm 755 "$pkgdir/usr/bin/"
   ln -s /usr/share/manga_downloader/manga.py "$pkgdir/usr/bin/manga_downloader"
