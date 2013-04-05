@@ -34,6 +34,7 @@ build() {
 
   # python fix
   find -type f -exec sed -e 's,#!/usr/bin/env python,#!/usr/bin/env python2,g' -i {} \;
+  find -type f -exec sed -e 's,#!/usr/bin/python,#!/usr/bin/python2,g' -i {} \;
 }
 
 
