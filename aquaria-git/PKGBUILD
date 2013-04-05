@@ -5,7 +5,7 @@
 
 
 pkgname=aquaria-git
-pkgver=20130216
+pkgver=0.240.b199e40
 pkgrel=1
 pkgdesc="2D Fantasy Action-Adventure by Bit Blot. Open Source version. Package uses data files from Humble Indie Bundle if present, otherwise falls back to downloading beta."
 arch=('i686' 'x86_64')
@@ -14,37 +14,29 @@ license=('custom: commercial' 'GPL')
 depends=('openal' 'sdl' 'lua51' 'freetype2' 'libvorbis' 'gcc-libs' 'libpng')
 makedepends=('unzip' 'cmake' 'git')
 
-source=('aquaria.desktop'
+
+_gitname=aquaria
+source=('aquaria::git://github.com/fgenesis/Aquaria_clean.git'
+        'aquaria.desktop'
         'aquaria.sh'
         'aquaria-lnx-humble-bundle.mojo.run' #download from HIB
 	'lua51-fix.patch')
-md5sums=('71c79de74f4971cce34a172f44c9fc1d'
+md5sums=('SKIP'
+	 '71c79de74f4971cce34a172f44c9fc1d'
          'acecf3620ba38d51266b289f8897ca96'
          '8b24ddeeb553e028bbd501102f891cc2'
          '28b93e87acd1e19f52d558b6a05dd5e7')
 
-#PKGEXT='.pkg.tar'
+PKGEXT='.pkg.tar'
 
-_gitroot=git://github.com/fgenesis/Aquaria_clean.git
-_gitname=aquaria
+pkgver() {
+  cd "$srcdir/$_gitname"
+  echo "0.$(git rev-list --count HEAD).$(git describe --always)"
+}
+
 
 build() {
-  cd "$srcdir"
-  msg "Connecting to GIT server...."
-
-  if [[ -d "$_gitname" ]]; then
-    cd "$_gitname" && git pull origin
-    msg "The local files are updated."
-  else
-    git clone "$_gitroot" "$_gitname"
-  fi
-
-  msg "GIT checkout done or server timeout"
-
-  rm -rf "$srcdir/$_gitname-build"
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
 
   # Lua 5.1 fix
   git apply "$srcdir"/lua51-fix.patch
@@ -77,7 +69,7 @@ package() {
   cp -r data/* "$pkgdir/usr/share/$pkgname"
   cp -r docs/* "$pkgdir/usr/share/doc/$pkgname"
 
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
 
   cp -r game_scripts/* "$pkgdir/usr/share/$pkgname"
   cp -r files/* "$pkgdir/usr/share/$pkgname"
