@@ -2,7 +2,7 @@
 
 pkgbase=python-xerox-git
 pkgname=('python-xerox-git' 'python2-xerox-git')
-  pkgdesc="copy paste module for python"
+pkgdesc="copy paste module for python"
 pkgver=v0.2.1.r33.gd8aa2cb
 pkgrel=1
 arch=('any')
