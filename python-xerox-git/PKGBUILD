@@ -27,7 +27,7 @@ prepare() {
 }
 
 package_python-xerox-git() {
-  depends=('python')
+  depends=('python' 'xclip')
   pkgdesc="copy paste module for python 3"
   provides=('python-xerox')
   conflicts=('python-xerox')
@@ -38,7 +38,7 @@ package_python-xerox-git() {
 }
 
 package_python2-xerox-git() {
-  depends=('python2')
+  depends=('python2' 'xclip')
   pkgdesc="copy paste module for python 2"
   provides=('python2-xerox')
   conflicts=('python2-xerox')
