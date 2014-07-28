@@ -24,8 +24,6 @@ prepare() {
 package_python-xerox() {
   depends=('python' 'xclip')
   pkgdesc="copy paste module for python 3"
-  provides=('python-xerox')
-  conflicts=('python-xerox')
 
   cd "xerox-$pkgver"
   python setup.py install --root="$pkgdir/" --optimize=1
@@ -35,8 +33,6 @@ package_python-xerox() {
 package_python2-xerox() {
   depends=('python2' 'xclip')
   pkgdesc="copy paste module for python 2"
-  provides=('python2-xerox')
-  conflicts=('python2-xerox')
 
   cd "xerox-$pkgver-python2"
   python2 setup.py install --root="$pkgdir/" --optimize=1
