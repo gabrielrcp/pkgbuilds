@@ -41,7 +41,7 @@ depends=(
   mate-system-monitor
   mate-terminal
   mate-themes
-  mate-user-share
+#  mate-user-share
   mate-utils
   mozo
   pluma
