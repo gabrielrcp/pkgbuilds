@@ -1,0 +1,35 @@
+# $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
+# Maintainer: Gabriel Peixoto <gabriel@gengar>
+pkgname=pulseaudio-meta
+pkgver=1
+pkgrel=1
+pkgdesc="Meta-package to install pulse and dependencies"
+arch=('any')
+url=""
+license=('GPL')
+depends=(
+  'auctex'
+  'texlive-bibtexextra'
+  'texlive-core'
+  'texlive-fontsextra'
+  'texlive-formatsextra'
+  'texlive-games'
+  'texlive-genericextra'
+  'texlive-htmlxml'
+  'texlive-humanities'
+  'texlive-latexextra'
+  'texlive-music'
+  'texlive-pictures'
+  'texlive-plainextra'
+  'texlive-pstricks'
+  'texlive-publishers'
+  'texlive-science'
+  'texlive-langchinese'
+  'texlive-langcyrillic'
+  'texlive-langextra'
+  'texlive-langgreek'
+  'texlive-langjapanese'
+  'texlive-langkorean'
+)
+
+# vim:set ts=2 sw=2 et:
