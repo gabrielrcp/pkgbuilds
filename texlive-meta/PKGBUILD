@@ -1,9 +1,9 @@
 # $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
 # Maintainer: Gabriel Peixoto <gabriel@gengar>
-pkgname=pulseaudio-meta
+pkgname=texlive-meta
 pkgver=1
 pkgrel=1
-pkgdesc="Meta-package to install pulse and dependencies"
+pkgdesc="Meta-package for a full installation of texlive"
 arch=('any')
 url=""
 license=('GPL')
