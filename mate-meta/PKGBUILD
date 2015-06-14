@@ -1,13 +1,15 @@
 # $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
 # Maintainer: Gabriel Peixoto <gabriel@magikarp>
 pkgname=mate-meta
-pkgver=1
+pkgver=2
 pkgrel=1
 pkgdesc="A metapackage to install Mate Desktop and extras"
 arch=('any')
 url="http://mate-desktop.org/"
 license=('GPL')
-# pacman -Sqg mate mate-extra | sort
+
+# pacman -Sqg mate mate-extra | sort -u
+
 depends=(
   atril
   caja
@@ -24,10 +26,9 @@ depends=(
   mate-backgrounds
   mate-control-center
   mate-desktop
-  mate-dialogs
   mate-icon-theme
   mate-icon-theme-faenza
-  mate-media-pulseaudio
+  mate-media
   mate-menus
   mate-netspeed
   mate-notification-daemon
@@ -37,11 +38,11 @@ depends=(
   mate-screensaver
   mate-sensors-applet
   mate-session-manager
-  mate-settings-daemon-pulseaudio
+  mate-settings-daemon
   mate-system-monitor
   mate-terminal
   mate-themes
-#  mate-user-share
+  #mate-user-share
   mate-utils
   mozo
   pluma
@@ -51,4 +52,3 @@ package() {
   true
 }
 
-# vim:set ts=2 sw=2 et:
